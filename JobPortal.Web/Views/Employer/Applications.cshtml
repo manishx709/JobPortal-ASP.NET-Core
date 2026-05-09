@@ -1,0 +1,275 @@
+﻿@model List<JobPortal.Web.Models.EmployerApplicationDTO>
+
+<h2 class="mb-4 fw-bold">
+    Applicants
+</h2>
+
+<div class="row mb-4">
+
+    <div class="col-md-3">
+
+        <div class="card bg-primary text-white shadow-sm border-0 rounded-4">
+
+            <div class="card-body text-center">
+
+                <h5>Total Applications</h5>
+
+                <h2>@Model.Count</h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card bg-success text-white shadow-sm border-0 rounded-4">
+
+            <div class="card-body text-center">
+
+                <h5>Accepted</h5>
+
+                <h2>
+                    @Model.Count(a => a.Status == "Accepted")
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card bg-danger text-white shadow-sm border-0 rounded-4">
+
+            <div class="card-body text-center">
+
+                <h5>Rejected</h5>
+
+                <h2>
+                    @Model.Count(a => a.Status == "Rejected")
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card bg-warning text-dark shadow-sm border-0 rounded-4">
+
+            <div class="card-body text-center">
+
+                <h5>Pending</h5>
+
+                <h2>
+                    @Model.Count(a => a.Status == "Pending")
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="card shadow-sm border-0 rounded-4 mb-4">
+
+    <div class="card-body">
+
+        <h4 class="mb-4 fw-bold">
+
+            Application Analytics
+
+        </h4>
+
+        <canvas id="applicationChart"
+                height="100">
+        </canvas>
+
+    </div>
+
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info shadow-sm rounded-4">
+
+        No applications found.
+
+    </div>
+}
+else
+{
+    <div class="card shadow-sm border-0 rounded-4">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table align-middle table-hover">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>Candidate</th>
+
+                            <th>Email</th>
+
+                            <th>Job</th>
+
+                            <th>Status</th>
+
+                            <th>Applied Date</th>
+
+                            <th>Resume</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var app in Model)
+                        {
+                            <tr>
+
+                                <td class="fw-semibold">
+                                    @app.CandidateName
+                                </td>
+
+                                <td>
+                                    @app.CandidateEmail
+                                </td>
+
+                                <td>
+                                    @app.JobTitle
+                                </td>
+
+                                <td>
+
+                                    @if (app.Status == "Accepted")
+                                    {
+                                        <span class="badge bg-success">
+                                            Accepted
+                                        </span>
+                                    }
+                                    else if (app.Status == "Rejected")
+                                    {
+                                        <span class="badge bg-danger">
+                                            Rejected
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">
+                                            Pending
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <td>
+                                    @app.AppliedDate
+                                </td>
+
+                                <td>
+
+                                    <a href="https://localhost:7101/@app.ResumePath"
+                                       target="_blank"
+                                       class="btn btn-outline-primary btn-sm">
+
+                                        <i class="bi bi-file-earmark-pdf"></i>
+                                        Resume
+
+                                    </a>
+
+                                </td>
+
+                                <td>
+
+                                    <div class="d-flex gap-2">
+
+                                        <a asp-controller="Employer"
+                                           asp-action="Accept"
+                                           asp-route-id="@app.Id"
+                                           class="btn btn-success btn-sm">
+
+                                            <i class="bi bi-check-circle"></i>
+
+                                        </a>
+
+                                        <a asp-controller="Employer"
+                                           asp-action="Reject"
+                                           asp-route-id="@app.Id"
+                                           class="btn btn-danger btn-sm">
+
+                                            <i class="bi bi-x-circle"></i>
+
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+<script>
+
+     const ctx =
+         document.getElementById(
+             'applicationChart');
+
+     new Chart(ctx,
+     {
+         type: 'bar',
+
+         data:
+         {
+             labels:
+             [
+                 'Accepted',
+                 'Rejected',
+                 'Pending'
+             ],
+
+             datasets:
+             [{
+                 label: 'Applications',
+
+                 data:
+                 [
+                     @Model.Count(a => a.Status == "Accepted"),
+                     @Model.Count(a => a.Status == "Rejected"),
+                     @Model.Count(a => a.Status == "Pending")
+                 ],
+
+                 borderWidth: 1
+             }]
+         },
+
+         options:
+         {
+             responsive: true
+         }
+     });
+
+</script>

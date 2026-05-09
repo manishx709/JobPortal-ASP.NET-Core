@@ -1,0 +1,70 @@
+﻿@model JobPortal.Web.Models.RegisterDTO
+
+<h2>Register</h2>
+
+<form method="post">
+
+    <div class="mb-3">
+
+        <label>Full Name</label>
+
+        <input asp-for="FullName"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Email</label>
+
+        <input asp-for="Email"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Password</label>
+
+        <input asp-for="Password"
+               type="password"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Role</label>
+
+        <select asp-for="Role"
+                class="form-control">
+
+            <option value="Candidate">
+                Candidate
+            </option>
+
+            <option value="Employer">
+                Employer
+            </option>
+
+        </select>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Register
+
+    </button>
+
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">
+
+        @ViewBag.Error
+
+    </p>
+}

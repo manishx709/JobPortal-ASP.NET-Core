@@ -1,0 +1,123 @@
+﻿@model JobPortal.Web.Models.JobDTO
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-body p-5">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <h1 class="fw-bold">
+                        @Model.Title
+                    </h1>
+
+                    <h5 class="text-muted">
+
+                        <i class="bi bi-building"></i>
+                        @Model.CompanyName
+
+                    </h5>
+
+                </div>
+
+                <span class="badge bg-success fs-6 p-3">
+
+                    ₹@Model.Salary
+
+                </span>
+
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="row">
+
+                <div class="col-md-8">
+
+                    <h4>Description</h4>
+
+                    <p class="mt-3 fs-5">
+
+                        @Model.Description
+
+                    </p>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card bg-light border-0 shadow-sm">
+
+                        <div class="card-body">
+
+                            <h5 class="fw-bold mb-4">
+
+                                Job Details
+
+                            </h5>
+
+                            <p>
+
+                                <i class="bi bi-geo-alt-fill text-primary"></i>
+
+                                <strong>Location:</strong>
+                                @Model.Location
+
+                            </p>
+
+                            <p>
+
+                                <i class="bi bi-cash-stack text-success"></i>
+
+                                <strong>Salary:</strong>
+                                ₹@Model.Salary
+
+                            </p>
+
+                            <p>
+
+                                <i class="bi bi-calendar-event text-danger"></i>
+
+                                <strong>Posted:</strong>
+                                @Model.PostedDate
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mt-5 d-flex gap-3">
+
+                <a asp-action="Index"
+                   class="btn btn-outline-dark btn-lg">
+
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Jobs
+
+                </a>
+
+                <a asp-controller="Application"
+                   asp-action="Apply"
+                   asp-route-jobId="@Model.Id"
+                   class="btn btn-success btn-lg">
+
+                    <i class="bi bi-send-fill"></i>
+                    Apply Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

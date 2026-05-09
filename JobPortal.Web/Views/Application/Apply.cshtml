@@ -1,0 +1,27 @@
+﻿<h2>Apply For Job</h2>
+
+<form method="post"
+      enctype="multipart/form-data">
+
+    <input type="hidden"
+           name="jobId"
+           value="@ViewBag.JobId" />
+
+    <div class="mb-3">
+
+        <label>Select Resume</label>
+
+        <input type="file"
+               name="resume"
+               class="form-control" />
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-success">
+
+        Submit Application
+
+    </button>
+
+</form>

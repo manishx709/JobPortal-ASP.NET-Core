@@ -1,0 +1,105 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Cards */
+
+.card {
+    transition: 0.3s;
+    border-radius: 18px;
+}
+
+    .card:hover {
+        transform: translateY(-6px);
+    }
+
+/* Buttons */
+
+.btn {
+    border-radius: 10px;
+    padding: 10px 18px;
+}
+
+/* Navbar */
+
+.navbar-brand {
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+/* Hero Section */
+
+.bg-dark.rounded-4 {
+    background: linear-gradient( 135deg, #1e293b, #0f172a ) !important;
+}
+
+/* Badges */
+
+.badge {
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 10px;
+}
+
+/* Footer */
+
+footer {
+    margin-top: 40px;
+}
+.nav-link {
+    font-size: 17px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+    .nav-link:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+.dark-mode {
+    background-color: #121212 !important;
+    color: white !important;
+}
+
+    .dark-mode .card {
+        background-color: #1e1e1e;
+        color: white;
+    }
+
+    .dark-mode .table {
+        color: white;
+    }
+
+    .dark-mode .table-dark {
+        background-color: #000;
+    }
+
+    .dark-mode .navbar {
+        background-color: #000 !important;
+    }
+
+    .dark-mode .bg-light {
+        background-color: #1e1e1e !important;
+    }
+
+    .dark-mode .text-muted {
+        color: #cfcfcf !important;
+    }

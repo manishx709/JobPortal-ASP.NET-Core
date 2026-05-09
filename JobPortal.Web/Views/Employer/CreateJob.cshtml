@@ -1,0 +1,88 @@
+﻿@model JobPortal.Web.Models.CreateJobDTO
+
+<h2>Create Job</h2>
+
+<form method="post"
+      enctype="multipart/form-data">
+
+    <div class="mb-3">
+
+        <label>Title</label>
+
+        <input asp-for="Title"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Description</label>
+
+        <textarea asp-for="Description"
+                  class="form-control">
+        </textarea>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Company Name</label>
+
+        <input asp-for="CompanyName"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Location</label>
+
+        <input asp-for="Location"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Salary</label>
+
+        <input asp-for="Salary"
+               class="form-control" />
+
+    </div>
+    <div class="mb-3">
+
+        <label>Company Logo</label>
+
+        <input type="file"
+               name="Logo"
+               class="form-control" />
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Create Job
+
+    </button>
+
+</form>
+
+@if (TempData["success"] != null)
+{
+    <p style="color:green">
+
+        @TempData["success"]
+
+    </p>
+}
+
+@if (TempData["error"] != null)
+{
+    <p style="color:red">
+
+        @TempData["error"]
+
+    </p>
+}

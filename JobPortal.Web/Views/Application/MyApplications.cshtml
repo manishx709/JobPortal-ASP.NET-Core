@@ -1,0 +1,191 @@
+﻿@model List<JobPortal.Web.Models.ApplicationDTO>
+
+<h2 class="mb-4 fw-bold">
+    My Applications
+</h2>
+
+<div class="row mb-4">
+
+    <div class="col-md-3">
+
+        <div class="card bg-primary text-white shadow-sm border-0 rounded-4">
+
+            <div class="card-body text-center">
+
+                <h5>Total Applied</h5>
+
+                <h2>@Model.Count</h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card bg-success text-white shadow-sm border-0 rounded-4">
+
+            <div class="card-body text-center">
+
+                <h5>Accepted</h5>
+
+                <h2>
+                    @Model.Count(a => a.Status == "Accepted")
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card bg-danger text-white shadow-sm border-0 rounded-4">
+
+            <div class="card-body text-center">
+
+                <h5>Rejected</h5>
+
+                <h2>
+                    @Model.Count(a => a.Status == "Rejected")
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card bg-warning text-dark shadow-sm border-0 rounded-4">
+
+            <div class="card-body text-center">
+
+                <h5>Pending</h5>
+
+                <h2>
+                    @Model.Count(a => a.Status == "Pending")
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info rounded-4 shadow-sm">
+
+        You have not applied to any jobs yet.
+
+    </div>
+}
+else
+{
+    <div class="card shadow-sm border-0 rounded-4">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>Job</th>
+
+                            <th>Company</th>
+
+                            <th>Applied Date</th>
+
+                            <th>Status</th>
+
+                            <th>Resume</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var app in Model)
+                        {
+                            <tr>
+
+                                <td class="fw-semibold">
+                                    @app.JobTitle
+                                </td>
+
+                                <td>
+                                    @app.CompanyName
+                                </td>
+
+                                <td>
+                                    @app.AppliedDate
+                                </td>
+
+                                <td>
+
+                                    @if (app.Status == "Pending")
+                                    {
+                                        <span class="badge bg-warning text-dark">
+
+                                            Pending
+
+                                        </span>
+                                    }
+
+                                    else if (app.Status == "Accepted")
+                                    {
+                                        <span class="badge bg-success">
+
+                                            Accepted
+
+                                        </span>
+                                    }
+
+                                    else if (app.Status == "Rejected")
+                                    {
+                                        <span class="badge bg-danger">
+
+                                            Rejected
+
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <td>
+
+                                    <a href="https://localhost:7101/@app.ResumePath"
+                                       target="_blank"
+                                       class="btn btn-outline-primary btn-sm">
+
+                                        <i class="bi bi-file-earmark-pdf"></i>
+                                        Resume
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+}
